@@ -1,0 +1,207 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+}
+4. Instructions pour Ajouter des Pages Supplémentaires
+Histoire (history.html) : Suis la même structure que l'index, avec du contenu différent pour raconter l'histoire de ton serveur.
+Règlement (rules.html) : Utilise une liste pour énumérer les règles.
+5. Hébergement
+Pour héberger ton site gratuitement, tu peux utiliser des services comme GitHub Pages, Netlify, ou Vercel.
+
+Si tu as des questions spécifiques ou besoin d'aide avec une partie du code, n'hésite pas à demander !
+
+j'aimerai que la page rules soit un livre interactif ou les gens peuvent tourner les pages en un clic
+ChatGPT
+Pour créer une page de règlement sous forme de livre interactif où les utilisateurs peuvent tourner les pages en un clic, tu peux utiliser HTML, CSS, et JavaScript. Il existe des bibliothèques comme Turn.js qui facilitent ce type de fonctionnalité, mais je vais te montrer une version simplifiée avec du code personnalisé.
+
+1. Structure de Base
+HTML (rules.html)
+html
+Copier le code
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Règlement - Serveur GTA RP</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Règlement du Serveur GTA RP</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="history.html">Histoire</a></li>
+                <li><a href="rules.html">Règlement</a></li>
+                <li><a href="https://discord.com" target="_blank">Discord</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="book">
+            <div class="page" id="page1">
+                <h2>Page 1</h2>
+                <p>Bienvenue sur la première page des règles du serveur. Assurez-vous de lire chaque section attentivement.</p>
+            </div>
+            <div class="page" id="page2">
+                <h2>Page 2</h2>
+                <p>Règle 1: Respectez tous les joueurs et le staff.</p>
+                <p>Règle 2: Pas de triche ni de comportement abusif.</p>
+            </div>
+            <div class="page" id="page3">
+                <h2>Page 3</h2>
+                <p>Règle 3: Utilisez le chat de manière appropriée.</p>
+                <p>Règle 4: Jouez de manière réaliste.</p>
+            </div>
+            <button class="prev-page" onclick="previousPage()">&#10094; Précédent</button>
+            <button class="next-page" onclick="nextPage()">Suivant &#10095;</button>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Serveur GTA RP</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
+CSS (styles.css)
+css
+Copier le code
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+.book {
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.page {
+    display: none;
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.page.active {
+    display: block;
+}
+
+button.prev-page, button.next-page {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+button.prev-page {
+    left: 0;
+}
+
+button.next-page {
+    right: 0;
+}
+
+button.prev-page:disabled, button.next-page:disabled {
+    background-color: #777;
+}
+JavaScript (script.js)
+javascript
+Copier le code
+let currentPage = 1;
+const pages = document.querySelectorAll('.page');
+const totalPages = pages.length;
+
+function showPage(page) {
+    pages.forEach((p, index) => {
+        p.classList.toggle('active', index === page - 1);
+    });
+}
+
+function nextPage() {
+    if (currentPage < totalPages) {
+        currentPage++;
+        showPage(currentPage);
+    }
+}
+
+function previousPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        showPage(currentPage);
+    }
+}
+
+// Initial page load
+showPage(currentPage);
